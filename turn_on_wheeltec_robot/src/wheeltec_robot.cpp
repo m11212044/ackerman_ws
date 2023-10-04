@@ -120,6 +120,10 @@ Function: Publish the odometer topic, Contains position, attitude, triaxial velo
 ***************************************/
 void turn_on_robot::Publish_Odom()
 {
+
+    static tf::TransformBroadcaster odom_broadcaster;
+    static geometry_msgs::TransformStamped odom_trans;
+
     //Convert the Z-axis rotation Angle into a quaternion for expression 
     //把Z轴转角转换为四元数进行表达
     geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(Robot_Pos.Z);
@@ -150,6 +154,16 @@ void turn_on_robot::Publish_Odom()
       memcpy(&odom.pose.covariance, odom_pose_covariance, sizeof(odom_pose_covariance)),
       memcpy(&odom.twist.covariance, odom_twist_covariance, sizeof(odom_twist_covariance));       
     odom_publisher.publish(odom); //Pub odometer topic //发布里程计话题
+
+    // 發布TF
+    odom_trans.header.stamp = _Now;
+    odom_trans.header.frame_id = odom_frame_id;
+    odom_trans.child_frame_id = robot_frame_id;
+    odom_trans.transform.translation.x = Robot_Pos.X;
+    odom_trans.transform.translation.y = Robot_Pos.Y;
+    odom_trans.transform.translation.z = Robot_Pos.Z;
+    odom_trans.transform.rotation = odom_quat;
+    odom_broadcaster.sendTransform(odom_trans);
 }
 /**************************************
 Date: January 28, 2021
