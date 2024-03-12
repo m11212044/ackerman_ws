@@ -34,8 +34,19 @@
     file="$(find turn_on_wheeltec_robot)/launch/include/velocity_smoother.launch" >
   </include>
 
-    <node pkg="tf" type="static_transform_publisher" name="base_link_to_cam" args=" 0.42 0.0 0.34 0.0 0.0 0.0 /base_link /camera_link 40" />
-    <node pkg="tf" type="static_transform_publisher" name="base_link_to_camUP" args=" -0.37 0.0 0.34 3.14 0.0 0.0 /base_link /cameraUP_link 40" />	
+    <!-- 車子中心 -->
+    <!-- 90度前後 -->
+    <!-- <node pkg="tf" type="static_transform_publisher" name="base_link_to_cam" args=" 0.42 0.0 0.34 0.0 0.0 0.0 /base_link /camera_link 40" />
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_camUP" args=" -0.37 0.0 0.34 3.14 0.0 0.0 /base_link /cameraUP_link 40" />	 -->
+
+    <!-- 前後向下頃斜15度 -->
+    <!-- <node pkg="tf" type="static_transform_publisher" name="base_link_to_cam" args=" 0.375 0.0 0.56 0.0 0.261 0.0 /base_link /camera_link 40" />
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_camUP" args=" -0.405 0.0 0.56 3.14 0.261 0.0 /base_link /cameraUP_link 40" />	 -->
+
+    <!-- 前後向下頃斜20度 -->
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_cam" args=" 0.375 0.0 0.56 0.0 0.348 0.0 /base_link /camera_link 40" />
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_camUP" args=" -0.405 0.0 0.56 3.14 0.348 0.0 /base_link /cameraUP_link 40" />	
+
 </launch>
 
 
